@@ -2270,7 +2270,11 @@ class Client(BaseClient):
             }
 
         """
-        return self._request_margin_api('get', 'account/status', True, version, data=params)
+        if self.tld == 'us':
+            path = 'accountStatus'
+        else:
+            path = 'account/status'
+        return self._request_margin_api('get', path, True, version, data=params)
 
     def get_account_api_trading_status(self, **params):
         """Fetch account api trading status detail.
